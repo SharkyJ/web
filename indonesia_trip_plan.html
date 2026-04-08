@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indonesia Trip 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dark:#0f2027;--teal:#1a3c40;--gold:#e8b931;--terra:#d4542b;
+  --cream:#f5f0e8;--sage:#2a6f6a;--sand:#f8f4ec;--light:#faf9f6;
+  --text:#2d2d2d;--muted:#8a9a9c;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--text);background:var(--dark);overflow-x:hidden}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;height:100vh;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,rgba(15,32,39,.85),rgba(26,60,64,.7)),
+    url('https://images.unsplash.com/photo-1596402184320-417e7178b2cd?w=1600&q=80') center/cover;
+  text-align:center;overflow:hidden;
+}
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 30% 80%,rgba(232,185,49,.12),transparent 60%),
+    radial-gradient(ellipse at 70% 20%,rgba(42,111,106,.15),transparent 50%);
+  pointer-events:none;
+}
+.hero-content{position:relative;z-index:2}
+.hero-icon{font-size:3rem;color:var(--gold);margin-bottom:1rem;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero h1{font-family:'Playfair Display',serif;font-size:5.5rem;font-weight:900;color:#fff;letter-spacing:.15em;line-height:1.1}
+.hero h2{font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold);letter-spacing:.4em;margin-top:.3em;font-weight:400}
+.hero-divider{width:120px;height:3px;background:var(--gold);margin:1.5rem auto}
+.hero-cities{font-size:1.1rem;color:var(--muted);letter-spacing:.25em}
+.hero-date{font-family:'DM Mono',monospace;font-size:.95rem;color:rgba(255,255,255,.45);margin-top:1.5rem;letter-spacing:.15em}
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:2;color:var(--gold);font-size:.8rem;letter-spacing:.2em;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+/* ===== SECTIONS ===== */
+section{position:relative}
+.section-pad{padding:6rem 2rem}
+.container{max-width:1100px;margin:0 auto}
+.section-label{font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.section-title{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;margin-bottom:.3rem}
+.section-title.white{color:#fff}
+.section-sub{color:var(--muted);font-size:.95rem;margin-bottom:3rem;max-width:600px}
+
+/* ===== OVERVIEW ===== */
+.overview{background:var(--sand);position:relative}
+.overview::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:6px;
+  background:linear-gradient(90deg,var(--terra),var(--gold),var(--sage));
+}
+.city-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-bottom:2.5rem}
+.city-card{
+  background:#fff;border-radius:16px;overflow:hidden;
+  box-shadow:0 8px 30px rgba(0,0,0,.08);transition:transform .3s,box-shadow .3s;
+}
+.city-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.12)}
+.city-card-img{height:180px;position:relative;overflow:hidden}
+.city-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.city-card:hover .city-card-img img{transform:scale(1.08)}
+.city-card-img .overlay{
+  position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,.6));
+  display:flex;align-items:flex-end;padding:1rem 1.2rem;
+}
+.city-card-img .city-name{font-family:'Playfair Display',serif;font-size:1.6rem;color:#fff;font-weight:700}
+.city-card-body{padding:1.3rem 1.4rem}
+.city-card-body .tag{
+  display:inline-block;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.25rem .7rem;border-radius:20px;margin-bottom:.6rem;font-weight:500;
+}
+.tag-jakarta{background:#fde8e2;color:var(--terra)}
+.tag-bandung{background:#e2f0ef;color:var(--sage)}
+.tag-yogya{background:#e8e2f0;color:#4a3c6a}
+.city-card-body .dates{font-family:'DM Mono',monospace;font-size:.85rem;color:var(--text);margin-bottom:.3rem}
+.city-card-body .nights{font-size:2rem;font-weight:700;margin:.3rem 0 .1rem}
+.nights-jakarta{color:var(--terra)}
+.nights-bandung{color:var(--sage)}
+.nights-yogya{color:#4a3c6a}
+.city-card-body .desc{font-size:.85rem;color:var(--muted);line-height:1.6}
+
+.transport-bar{
+  display:flex;align-items:center;justify-content:center;gap:1.5rem;
+  background:var(--teal);color:#fff;padding:1.2rem 2rem;border-radius:12px;
+}
+.transport-item{display:flex;align-items:center;gap:.5rem;font-size:.85rem}
+.transport-item i{color:var(--gold);font-size:1rem}
+.transport-sep{color:rgba(255,255,255,.2);font-size:1.2rem}
+
+/* ===== FLIGHT ===== */
+.flight{background:var(--dark);color:#fff;overflow:hidden;position:relative}
+.flight::before{
+  content:'';position:absolute;top:-200px;right:-200px;width:500px;height:500px;
+  background:radial-gradient(circle,rgba(232,185,49,.06),transparent 70%);pointer-events:none;
+}
+.flight-cards{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2.5rem}
+.flight-card{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;padding:2rem;position:relative;overflow:hidden;
+}
+.flight-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;border-radius:4px 0 0 4px}
+.flight-card.depart::before{background:var(--terra)}
+.flight-card.arrive::before{background:var(--sage)}
+.flight-card .label{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.2em;color:var(--gold);margin-bottom:.8rem}
+.flight-card .route{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:.6rem}
+.flight-card .detail{font-size:.9rem;color:var(--muted);line-height:1.8}
+.flight-card .detail strong{color:#fff}
+.flight-card i{position:absolute;top:1.5rem;right:1.5rem;font-size:1.5rem;color:rgba(255,255,255,.1)}
+
+.intercity{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;padding:1.8rem 2rem;
+}
+.intercity h3{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:1.2rem;color:var(--gold)}
+.intercity-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.ic-item{display:flex;align-items:flex-start;gap:.8rem}
+.ic-item .ic-icon{
+  width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  background:rgba(232,185,49,.12);color:var(--gold);font-size:1rem;flex-shrink:0;
+}
+.ic-item .ic-route{font-size:.9rem;font-weight:500;color:#fff;margin-bottom:.15rem}
+.ic-item .ic-detail{font-size:.8rem;color:var(--muted)}
+
+/* ===== CITY SECTION ===== */
+.city-section{position:relative;overflow:hidden}
+.city-section .city-hero{
+  height:50vh;min-height:360px;display:flex;align-items:flex-end;
+  position:relative;overflow:hidden;
+}
+.city-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.city-hero .hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(transparent 30%,rgba(15,32,39,.85));
+}
+.city-hero .hero-text{position:relative;z-index:2;padding:3rem;width:100%}
+.city-hero h2{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:900;color:#fff;letter-spacing:.05em}
+.city-hero p{color:rgba(255,255,255,.7);font-size:1.05rem;margin-top:.3rem;max-width:600px}
+
+/* Spots Grid */
+.spots{background:var(--sand);padding:4rem 2rem}
+.spots-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.spot-card{
+  background:#fff;border-radius:14px;overflow:hidden;
+  box-shadow:0 4px 20px rgba(0,0,0,.06);transition:transform .3s;
+}
+.spot-card:hover{transform:translateY(-4px)}
+.spot-card-img{height:160px;overflow:hidden;position:relative}
+.spot-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.spot-card:hover .spot-card-img img{transform:scale(1.06)}
+.spot-card-body{padding:1.1rem 1.2rem}
+.spot-card-body h4{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:.4rem;color:var(--teal)}
+.spot-card-body p{font-size:.82rem;color:var(--muted);line-height:1.65}
+
+/* Day-by-day */
+.itinerary{background:#fff;padding:4rem 2rem}
+.day-timeline{position:relative;padding-left:3rem}
+.day-timeline::before{
+  content:'';position:absolute;left:14px;top:0;bottom:0;width:2px;
+  background:linear-gradient(var(--gold),var(--sage));
+}
+.day-block{position:relative;margin-bottom:2.5rem}
+.day-block:last-child{margin-bottom:0}
+.day-dot{
+  position:absolute;left:-3rem;top:.2rem;width:30px;height:30px;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:'DM Mono',monospace;font-size:.65rem;font-weight:700;color:#fff;
+}
+.dot-jakarta{background:var(--terra)}
+.dot-bandung{background:var(--sage)}
+.dot-yogya{background:var(--dark)}
+.day-header{display:flex;align-items:baseline;gap:.8rem;margin-bottom:.6rem}
+.day-header .day-num{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--teal)}
+.day-header .day-date{font-family:'DM Mono',monospace;font-size:.8rem;color:var(--muted)}
+.day-header .day-title{font-size:.9rem;font-weight:500;color:var(--gold);margin-left:auto}
+.day-items{display:flex;flex-wrap:wrap;gap:.5rem .8rem}
+.day-item{
+  display:flex;align-items:center;gap:.4rem;
+  font-size:.85rem;color:var(--text);line-height:1.7;
+}
+.day-item i{color:var(--sage);font-size:.7rem;flex-shrink:0}
+.day-item.food i{color:var(--terra)}
+.day-block .day-desc{
+  background:var(--sand);border-radius:10px;padding:1rem 1.2rem;margin-top:.6rem;
+  font-size:.85rem;line-height:1.8;color:var(--text);
+}
+
+/* ===== TIPS ===== */
+.tips{background:var(--teal);color:#fff;padding:4rem 2rem;position:relative;overflow:hidden}
+.tips::before{
+  content:'';position:absolute;bottom:-100px;right:-100px;width:300px;height:300px;
+  background:radial-gradient(circle,rgba(232,185,49,.08),transparent);pointer-events:none;
+}
+.tips-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;position:relative;z-index:1}
+.tip-card{
+  display:flex;align-items:flex-start;gap:1rem;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:1.2rem 1.4rem;
+}
+.tip-card i{color:var(--gold);font-size:1.2rem;margin-top:.15rem;flex-shrink:0}
+.tip-card .tip-title{font-size:.9rem;font-weight:500;margin-bottom:.2rem}
+.tip-card .tip-text{font-size:.8rem;color:rgba(255,255,255,.6);line-height:1.6}
+
+/* ===== FOOTER ===== */
+.footer{
+  background:var(--dark);text-align:center;padding:3rem 2rem;
+  border-top:3px solid var(--gold);
+}
+.footer p{font-family:'DM Mono',monospace;font-size:.8rem;color:var(--muted);letter-spacing:.1em}
+.footer .emoji{font-size:1.5rem;margin-bottom:.5rem;display:block}
+
+/* ===== ANIMATIONS ===== */
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .hero h1{font-size:3rem}
+  .hero h2{font-size:1.2rem;letter-spacing:.2em}
+  .city-cards,.spots-grid,.flight-cards,.intercity-grid,.tips-grid{grid-template-columns:1fr}
+  .city-hero h2{font-size:2.2rem}
+  .transport-bar{flex-direction:column;gap:.8rem}
+  .transport-sep{display:none}
+  .day-header{flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-icon"><i class="fas fa-plane"></i></div>
+    <h1>INDONESIA</h1>
+    <h2>TRIP 2026</h2>
+    <div class="hero-divider"></div>
+    <div class="hero-cities">Jakarta &nbsp;·&nbsp; Bandung &nbsp;·&nbsp; Yogyakarta</div>
+    <div class="hero-date">2026. 07. 31 &nbsp;~ &nbsp;08. 10</div>
+  </div>
+  <div class="scroll-hint">SCROLL <i class="fas fa-chevron-down" style="margin-left:.3rem"></i></div>
+</section>
+
+<!-- ===== OVERVIEW ===== -->
+<section class="overview section-pad">
+  <div class="container">
+    <div class="section-label fade-up">Overview</div>
+    <div class="section-title fade-up">여행 개요</div>
+    <div class="section-sub fade-up">11일간의 자바 섬 횡단 — 수도 자카르타에서 고대 사원의 도시 욕야카르타까지</div>
+
+    <div class="city-cards">
+      <div class="city-card fade-up">
+        <div class="city-card-img">
+          <img src="https://images.unsplash.com/photo-1555899434-94d1368aa7af?w=600&q=80" alt="Jakarta">
+          <div class="overlay"><span class="city-name">Jakarta</span></div>
+        </div>
+        <div class="city-card-body">
+          <span class="tag tag-jakarta">수도 · 역사 · 문화</span>
+          <div class="dates">7/31 (목) ~ 8/3 (일)</div>
+          <div class="nights nights-jakarta">3<span style="font-size:1rem;font-weight:400">박</span></div>
+          <div class="desc">인도네시아의 심장, 역사와 현대가 공존하는 메가시티</div>
+        </div>
+      </div>
+      <div class="city-card fade-up" style="animation-delay:.15s">
+        <div class="city-card-img">
+          <img src="https://images.unsplash.com/photo-1598880940080-ff9a29891b85?w=600&q=80" alt="Bandung">
+          <div class="overlay"><span class="city-name">Bandung</span></div>
+        </div>
+        <div class="city-card-body">
+          <span class="tag tag-bandung">자연 · 힐링 · 화산</span>
+          <div class="dates">8/3 (일) ~ 8/6 (수)</div>
+          <div class="nights nights-bandung">3<span style="font-size:1rem;font-weight:400">박</span></div>
+          <div class="desc">"자바의 파리" — 화산, 차밭, 아르데코 건축의 고원 도시</div>
+        </div>
+      </div>
+      <div class="city-card fade-up" style="animation-delay:.3s">
+        <div class="city-card-img">
+          <img src="https://images.unsplash.com/photo-1596402184320-417e7178b2cd?w=600&q=80" alt="Yogyakarta">
+          <div class="overlay"><span class="city-name">Yogyakarta</span></div>
+        </div>
+        <div class="city-card-body">
+          <span class="tag tag-yogya">사원 · 전통 · 예술</span>
+          <div class="dates">8/6 (수) ~ 8/10 (일)</div>
+          <div class="nights nights-yogya">4<span style="font-size:1rem;font-weight:400">박</span></div>
+          <div class="desc">자바 문화의 심장 — 세계유산 사원, 왕궁, 바틱의 도시</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="transport-bar fade-up">
+      <div class="transport-item"><i class="fas fa-plane-departure"></i> 인천 → Jakarta</div>
+      <span class="transport-sep">›</span>
+      <div class="transport-item"><i class="fas fa-train"></i> Jakarta → Bandung (기차 3h)</div>
+      <span class="transport-sep">›</span>
+      <div class="transport-item"><i class="fas fa-train"></i> Bandung → Yogyakarta (기차 6~7h)</div>
+      <span class="transport-sep">›</span>
+      <div class="transport-item"><i class="fas fa-plane"></i> Yogyakarta → Jakarta (국내선)</div>
+      <span class="transport-sep">›</span>
+      <div class="transport-item"><i class="fas fa-plane-arrival"></i> Jakarta → 인천</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FLIGHT ===== -->
+<section class="flight section-pad">
+  <div class="container">
+    <div class="section-label fade-up">Flight & Transport</div>
+    <div class="section-title white fade-up">항공 & 교통</div>
+    <div class="section-sub fade-up" style="color:var(--muted)">국제선 왕복 + 도시 간 기차·국내선 이동</div>
+
+    <div class="flight-cards">
+      <div class="flight-card depart fade-up">
+        <div class="label"><i class="fas fa-plane-departure" style="margin-right:.4rem"></i> 출발편</div>
+        <div class="route">인천 (ICN) → 자카르타 (CGK)</div>
+        <div class="detail">
+          <strong>2026년 7월 31일 (목)</strong><br>
+          출발 10:30 → 도착 15:40 (현지시간)<br>
+          비행시간 약 7시간 10분
+        </div>
+        <i class="fas fa-plane"></i>
+      </div>
+      <div class="flight-card arrive fade-up">
+        <div class="label"><i class="fas fa-plane-arrival" style="margin-right:.4rem"></i> 귀국편</div>
+        <div class="route">자카르타 (CGK) → 인천 (ICN)</div>
+        <div class="detail">
+          <strong>2026년 8월 10일 (일)</strong><br>
+          출발 23:30 → 도착 07:10 (+1일)<br>
+          비행시간 약 7시간 40분
+        </div>
+        <i class="fas fa-plane" style="transform:scaleX(-1)"></i>
+      </div>
+    </div>
+
+    <div class="intercity fade-up">
+      <h3><i class="fas fa-route" style="margin-right:.5rem"></i>도시 간 이동</h3>
+      <div class="intercity-grid">
+        <div class="ic-item">
+          <div class="ic-icon"><i class="fas fa-train"></i></div>
+          <div><div class="ic-route">Jakarta → Bandung</div><div class="ic-detail">기차 약 3시간 (Argo Parahyangan)</div></div>
+        </div>
+        <div class="ic-item">
+          <div class="ic-icon"><i class="fas fa-train"></i></div>
+          <div><div class="ic-route">Bandung → Yogyakarta</div><div class="ic-detail">기차 약 6~7시간</div></div>
+        </div>
+        <div class="ic-item">
+          <div class="ic-icon"><i class="fas fa-plane"></i></div>
+          <div><div class="ic-route">Yogyakarta → Jakarta</div><div class="ic-detail">국내선 약 1시간 15분</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== JAKARTA ===== -->
+<section class="city-section" id="jakarta">
+  <div class="city-hero">
+    <img src="https://images.unsplash.com/photo-1555899434-94d1368aa7af?w=1400&q=80" alt="Jakarta skyline">
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <h2>JAKARTA</h2>
+      <p>인도네시아의 수도, 역사와 현대가 공존하는 메가시티</p>
+    </div>
+  </div>
+
+  <div class="spots">
+    <div class="container">
+      <div class="section-label fade-up">Must Visit</div>
+      <div class="section-title fade-up" style="margin-bottom:2rem">주요 여행지</div>
+      <div class="spots-grid">
+        <div class="spot-card fade-up">
+          <div class="spot-card-img"><img src="https://images.unsplash.com/photo-1594402919317-9e67a4d28e09?w=500&q=80" alt="Monas"></div>
+          <div class="spot-card-body">
+            <h4><i class="fas fa-monument" style="color:var(--gold);margin-right:.4rem;font-size:.85rem"></i>Monas (국가기념탑)</h4>
+            <p>132m 높이의 독립 기념탑. 전망대에서 자카르타 시내 360° 조망 가능. 독립 투쟁의 상징으로 금박 불꽃이 꼭대기를 장식합니다.</p>
+          </div>
+        </div>
+        <div class="spot-card fade-up">
+          <div class="spot-card-img"><img src="https://images.unsplash.com/photo-1600320504498-29e409208fa8?w=500&q=80" alt="Istiqlal Mosque"></div>
+          <div class="spot-card-body">
+            <h4><i class="fas fa-mosque" style="color:var(--gold);margin-right:.4rem;font-size:.85rem"></i>Istiqlal Mosque</h4>
+            <p>동남아시아 최대 규모의 모스크. 맞은편 자카르타 성당과 마주보며 종교적 관용을 상징합니다. 무료 가이드 투어 가능.</p>
+          </div>
+        </div>
+        <div class="spot-card fade-up">
+          <div class="spot-card-img"><img src="https://images.unsplash.com/photo-1621275471769-e6aa344546d5?w=500&q=80" alt="Kota Tua"></div>
+          <div class="spot-card-body">
+            <h4><i class="fas fa-landmark" style="color:var(--gold);margin-right:.4rem;font-size:.85rem"></i>Kota Tua (구시가지)</h4>
+            <p>네덜란드 식민지 시대 건축물이 남아있는 역사 지구. Fatahillah 광장, 역사박물관, Cafe Batavia가 유명합니다.</p>
+          </div>
+        </div>
+        <div class="spot-card fade-up">
+          <div class="spot-card-img"><img src="https://images.unsplash.com/photo-1518457607834-e4e0a4ab6ab0?w=500&q=80" alt="Sunda Kelapa"></div>
+          <div class="spot-card-body">
+            <h4><i class="fas fa-anchor" style="color:var(--gold);margin-right:.4rem;font-size:.85rem"></i>Sunda Kelapa 항구</h4>
+            <p>13세기부터 이어진 역사적 항구. 전통 피니시(Pinisi) 범선이 정박해 있어 독특한 사진을 남길 수 있습니다.</p>
+          </div>
+        </div>
+        <div class="spot-card fade-up">
+          <div class="spot-card-img"><img src="https://images.unsplash.com/photo-1577401239170-897942555fb3?w=500&q=80" alt="National Museum"></div>
+          <div class="spot-card-body">
+            <h4><i class="fas fa-museum" style="color:var(--gold);margin-right:.4rem;font-size:.85rem"></i>National Museum</h4>
+            <p>수십만 년에 걸친 인도네시아 역사·문화 유물 컬렉션. 1868년 개관, Merdeka 광장에 위치한 대표 박물관.</p>
+          </div>
+        </div>
+        <div class="spot-card fade-up">
+          <div class="spot-card-img"><img src="https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?w=500&q=80" alt="Taman Mini"></div>
+          <div class="spot-card-body">
+            <h4><i class="fas fa-globe-asia" style="color:var(--gold);margin-right:.4rem;font-size:.85rem"></i>Taman Mini Indonesia</h4>
+            <p>인도네시아 18,000개 섬의 다양한 문화를 한눈에. 전통 가옥 복원, 박물관, 정원, 케이블카 체험.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="itinerary">
+    <div class="container">
+      <div class="section-label fade-up">Day by Day</div>
+      <div class="section-title fade-up" style="margin-bottom:2rem">일별 동선</div>
+      <div class="day-timeline">
+        <div class="day-block fade-up">
+          <div class="day-dot dot-jakarta">1</div>
+          <div class="day-header">
+            <span class="day-num">Day 1</span><span class="day-date">7/31 (목)</span>
+            <span class="day-title">도착 & 정비</span>
+          </div>
+          <div class="day-desc">
+            <div class="day-item"><i class="fas fa-plane-arrival"></i> 15:40 자카르타 도착</div>
+            <div class="day-item"><i class="fas fa-hotel"></i> 호텔 체크인 & 휴식</div>
+            <div class="day-item food"><i class="fas fa-utensils"></i> 저녁: 현지 로컬 식당 탐방 (나시고렝, 미고렝 추천)</div>
+          </div>
+        </div>
+        <div class="day-block fade-up">
+          <div class="day-dot dot-jakarta">2</div>
+          <div class="day-header">
+            <span class="day-num">Day 2</span><span class="day-date">8/1 (금)</span>
+            <span class="day-title">중심부 역사 투어</span>
+          </div>
+          <div class="day-desc">
+            <div class="day-item"><i class="fas fa-monument"></i> 오전: Monas (국가기념탑) + 국립박물관</div>
+            <div class="day-item"><i class="fas fa-mosque"></i> 오후: Istiqlal Mosque + 자카르타 성당</div>
+            <div class="day-item"><i class="fas fa-shopping-bag"></i> → Pasar Baru (올드마켓) 쇼핑</div>
+            <div class="day-item food"><i class="fas fa-utensils"></i> 저녁: M Bloc Space 카페거리</div>
+          </div>
+        </div>
+        <div class="day-block fade-up">
+          <div class="day-dot dot-jakarta">3</div>
+          <div class="day-header">
+            <span class="day-num">Day 3</span><span class="day-date">8/2 (토)</span>
+            <span class="day-title">구시가지 탐방</span>
+          </div>
+          <div class="day-desc">
+            <div class="day-item"><i class="fas fa-landmark"></i> 오전: Kota Tua (Fatahillah 광장) → 와양박물관 + 역사박물관</div>
+            <div class="day-item"><i class="fas fa-anchor"></i> 오후: Sunda Kelapa 항구</div>
+            <div class="day-item"><i class="fas fa-store"></i> → Glodok (차이나타운) 맛집</div>
+            <div class="day-item food"><i class="fas fa-utensils"></i> 저녁: Cafe Batavia에서 디너</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BANDUNG ===== -->
+<section class="city-section" id="bandung">
+  <div class="city-hero">
+    <img src="https://images.unsplash.com/photo-1598880940080-ff9a29891b85?w=1400&q=80" alt="Bandung tea plantation">
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <h2>BANDUNG</h2>
+      <p>"자바의 파리" — 화산, 차밭, 아르데코 건축의 고원 도시</p>
+    </div>
+  </div>
+
+  <div class="spots">
+    <div class="container">
+      <div class="section-label fade-up">Must Visit</div>
+      <div class="section-title fade-up" style="margin-bottom:2rem">주요 여행지</div>
+      <div class="spots-grid">
+        <div class="spot-card fade-up">
+          <div class="spot-card-img"><img src="https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?w=500&q=80" alt="Tangkuban Perahu"></div>
+          <div class="spot-card-body">
+            <h4><i class="fas fa-mountain" style="color:var(--gold);margin-right:.4rem;font-size:.85rem"></i>Tangkuban Perahu</h4>
+            <p>활화산 분화구 트레킹. 유황 냄새 가득한 장엄한 크레이터를 직접 내려다보는 체험. 반둥 북쪽 30km.</p>
+          </div>
+        </div>
+        <div class="spot-card fade-up">
+          <div class="spot-card-img"><img src="https://images.unsplash.com/photo-1580058861613-c tried67ff8f1?w=500&q=80" alt="Kawah Putih"></div>
+          <div class="spot-card-body">
+            <h4><i class="fas fa-water" style="color:var(--gold);margin-right:.4rem;font-size:.85rem"></i>Kawah Putih (백색 분화구)</h4>
+            <p>터키색 산성 호수. 신비로운 안개 속 사진 명소. 새벽에 방문하면 몽환적인 분위기를 감상할 수 있습니다.</p>
+          </div>
+        </div>
+        <div class="spot-card fade-up">
+          <div class="spot-card-img"><img src="https://images.unsplash.com/photo-1518457607834-e4e0a4ab6ab0?w=500&q=80" alt="Braga Street"></div>
+          <div class="spot-card-body">
+            <h4><i class="fas fa-store-alt" style="color:var(--gold);margin-right:.4rem;font-size:.85rem"></i>Braga Street</h4>
+            <p>아르데코 건축물이 줄지어 선 거리. 카페, 재즈바, 갤러리가 밀집해 있어 "자바의 파리"를 체감합니다.</p>
+          </div>
+        </div>
+        <div class="spot-card fade-up">
+          <div class="spot-card-img"><img src="https://images.unsplash.com/photo-1559628233-100c798642d4?w=500&q=80" alt="Lembang"></div>
+          <div class="spot-card-body">
+            <h4><i class="fas fa-leaf" style="color:var(--gold);margin-right:.4rem;font-size:.85rem"></i>Lembang 지역</h4>
+            <p>플로팅마켓, 온천, 딸기농장. Farmhouse Lembang에서 유럽풍 포토존도 즐길 수 있는 힐링 명소.</p>
+          </div>
+        </div>
+        <div class="spot-card fade-up">
+          <div class="spot-card-img"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=500&q=80" alt="Patenggang Lake"></div>
+          <div class="spot-card-body">
+            <h4><i class="fas fa-campground" style="color:var(--gold);margin-right:.4rem;font-size:.85rem"></i>Situ Patenggang 호수</h4>
+            <p>45,000ha 규모의 산정호수. 차밭과 캠핑·글램핑 명소. Rancabali Tea Walk에서 차밭 산책 추천.</p>
+          </div>
+        </div>
+        <div class="spot-card fade-up">
+          <div class="spot-card-img"><img src="https://images.unsplash.com/photo-1577401239170-897942555fb3?w=500&q=80" alt="Gedung Sate"></div>
+          <div class="spot-card-body">
+            <h4><i class="fas fa-building" style="color:var(--gold);margin-right:.4rem;font-size:.85rem"></i>Gedung Sate</h4>
+            <p>반둥의 아이콘적 건축물. 네덜란드-인도네시아 혼합 양식으로 인도네시아 독립역사의 상징입니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="itinerary">
+    <div class="container">
+      <div class="section-label fade-up">Day by Day</div>
+      <div class="section-title fade-up" style="margin-bottom:2rem">일별 동선</div>
+      <div class="day-timeline">
+        <div class="day-block fade-up">
+          <div class="day-dot dot-bandung">4</div>
+          <div class="day-header">
+            <span class="day-num">Day 4</span><span class="day-date">8/3 (일)</span>
+            <span class="day-title">이동 & 시내</span>
+          </div>
+          <div class="day-desc">
+            <div class="day-item"><i class="fas fa-train"></i> 오전: Jakarta → Bandung (기차 약 3시간)</div>
+            <div class="day-item"><i class="fas fa-hotel"></i> 오후: 호텔 체크인 → Gedung Sate 외관 감상</div>
+            <div class="day-item food"><i class="fas fa-utensils"></i> 저녁: Braga Street 산책, 카페·재즈바 탐방</div>
+          </div>
+        </div>
+        <div class="day-block fade-up">
+          <div class="day-dot dot-bandung">5</div>
+          <div class="day-header">
+            <span class="day-num">Day 5</span><span class="day-date">8/4 (월)</span>
+            <span class="day-title">북부 자연 투어</span>
+          </div>
+          <div class="day-desc">
+            <div class="day-item"><i class="fas fa-mountain"></i> 오전: Tangkuban Perahu 화산 분화구 트레킹</div>
+            <div class="day-item"><i class="fas fa-hot-tub-person"></i> → Ciater 온천 힐링</div>
+            <div class="day-item"><i class="fas fa-ship"></i> 오후: Lembang Floating Market → Farmhouse Lembang</div>
+            <div class="day-item food"><i class="fas fa-utensils"></i> 저녁: 반둥 현지 맛집 (바타고르 추천)</div>
+          </div>
+        </div>
+        <div class="day-block fade-up">
+          <div class="day-dot dot-bandung">6</div>
+          <div class="day-header">
+            <span class="day-num">Day 6</span><span class="day-date">8/5 (화)</span>
+            <span class="day-title">남부 자연 투어</span>
+          </div>
+          <div class="day-desc">
+            <div class="day-item"><i class="fas fa-water"></i> 오전: Kawah Putih (백색 분화구) — 새벽 출발 추천</div>
+            <div class="day-item"><i class="fas fa-campground"></i> 오후: Situ Patenggang 호수 → 차밭 (Rancabali Tea Walk)</div>
+            <div class="day-item"><i class="fas fa-shopping-bag"></i> 저녁: 반둥 시내 복귀, Factory Outlet 쇼핑</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== YOGYAKARTA ===== -->
+<section class="city-section" id="yogyakarta">
+  <div class="city-hero">
+    <img src="https://images.unsplash.com/photo-1596402184320-417e7178b2cd?w=1400&q=80" alt="Borobudur">
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <h2>YOGYAKARTA</h2>
+      <p>자바 문화의 심장 — 세계유산 사원, 왕궁, 바틱의 도시</p>
+    </div>
+  </div>
+
+  <div class="spots">
+    <div class="container">
+      <div class="section-label fade-up">Must Visit</div>
+      <div class="section-title fade-up" style="margin-bottom:2rem">주요 여행지</div>
+      <div class="spots-grid">
+        <div class="spot-card fade-up">
+          <div class="spot-card-img"><img src="https://images.unsplash.com/photo-1596402184320-417e7178b2cd?w=500&q=80" alt="Borobudur"></div>
+          <div class="spot-card-body">
+            <h4><i class="fas fa-vihara" style="color:var(--gold);margin-right:.4rem;font-size:.85rem"></i>Borobudur Temple</h4>
+            <p>세계 최대 불교 사원 (UNESCO). 9세기 건축, 504개 불상과 장엄한 스투파. 일출 감상 필수!</p>
+          </div>
+        </div>
+        <div class="spot-card fade-up">
+          <div class="spot-card-img"><img src="https://images.unsplash.com/photo-1584810359583-96fc3448beaa?w=500&q=80" alt="Prambanan"></div>
+          <div class="spot-card-body">
+            <h4><i class="fas fa-place-of-worship" style="color:var(--gold);margin-right:.4rem;font-size:.85rem"></i>Prambanan Temple</h4>
+            <p>동남아 2위 규모 힌두 사원 (UNESCO). 240개 사원, 47m 높이의 시바 신전. 라마야나 발레 공연 추천.</p>
+          </div>
+        </div>
+        <div class="spot-card fade-up">
+          <div class="spot-card-img"><img src="https://images.unsplash.com/photo-1565071783280-ab8e02232db0?w=500&q=80" alt="Kraton"></div>
+          <div class="spot-card-body">
+            <h4><i class="fas fa-crown" style="color:var(--gold);margin-right:.4rem;font-size:.85rem"></i>Kraton Palace (왕궁)</h4>
+            <p>욕야카르타 술탄의 현재 거처. 자바 건축·왕실 유물·전통 공연을 관람할 수 있는 살아있는 박물관.</p>
+          </div>
+        </div>
+        <div class="spot-card fade-up">
+          <div class="spot-card-img"><img src="https://images.unsplash.com/photo-1584522789421-2e6b14e6f4d5?w=500&q=80" alt="Taman Sari"></div>
+          <div class="spot-card-body">
+            <h4><i class="fas fa-archway" style="color:var(--gold);margin-right:.4rem;font-size:.85rem"></i>Taman Sari (물의 궁전)</h4>
+            <p>18세기 술탄의 휴양지. 수중 모스크·비밀 통로·왕실 수영장이 남아있는 신비로운 유적지.</p>
+          </div>
+        </div>
+        <div class="spot-card fade-up">
+          <div class="spot-card-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=500&q=80" alt="Malioboro"></div>
+          <div class="spot-card-body">
+            <h4><i class="fas fa-store" style="color:var(--gold);margin-right:.4rem;font-size:.85rem"></i>Malioboro Street</h4>
+            <p>욕야 최대 번화가·야시장. 바틱·기념품·사떼·구덱 등 길거리 음식의 천국. 저녁 방문 추천!</p>
+          </div>
+        </div>
+        <div class="spot-card fade-up">
+          <div class="spot-card-img"><img src="https://images.unsplash.com/photo-1504700610630-ac6ebe902b28?w=500&q=80" alt="Jomblang Cave"></div>
+          <div class="spot-card-body">
+            <h4><i class="fas fa-dungeon" style="color:var(--gold);margin-right:.4rem;font-size:.85rem"></i>Jomblang Cave</h4>
+            <p>싱크홀 동굴 로프 하강 탐험. "천상의 빛" — 동굴 속으로 쏟아지는 신비한 햇살이 하이라이트.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="itinerary">
+    <div class="container">
+      <div class="section-label fade-up">Day by Day</div>
+      <div class="section-title fade-up" style="margin-bottom:2rem">일별 동선</div>
+      <div class="day-timeline">
+        <div class="day-block fade-up">
+          <div class="day-dot dot-yogya">7</div>
+          <div class="day-header">
+            <span class="day-num">Day 7</span><span class="day-date">8/6 (수)</span>
+            <span class="day-title">이동 & Malioboro</span>
+          </div>
+          <div class="day-desc">
+            <div class="day-item"><i class="fas fa-train"></i> 오전: Bandung → Yogyakarta (기차 약 6~7시간)</div>
+            <div class="day-item"><i class="fas fa-hotel"></i> 오후: 호텔 체크인</div>
+            <div class="day-item"><i class="fas fa-store"></i> 저녁: Malioboro Street 야시장 → 바틱·기념품 쇼핑</div>
+            <div class="day-item food"><i class="fas fa-utensils"></i> 길거리 음식 (사떼, 구덱)</div>
+          </div>
+        </div>
+        <div class="day-block fade-up">
+          <div class="day-dot dot-yogya">8</div>
+          <div class="day-header">
+            <span class="day-num">Day 8</span><span class="day-date">8/7 (목)</span>
+            <span class="day-title">세계유산 사원 Day</span>
+          </div>
+          <div class="day-desc">
+            <div class="day-item"><i class="fas fa-sun"></i> 새벽 04:00: Borobudur 일출 투어 (차량 약 1시간)</div>
+            <div class="day-item"><i class="fas fa-vihara"></i> 오전: Borobudur 본 관람 → Mendut Temple</div>
+            <div class="day-item"><i class="fas fa-place-of-worship"></i> 오후: Prambanan Temple 관람</div>
+            <div class="day-item"><i class="fas fa-theater-masks"></i> 저녁: Ramayana Ballet 공연 (Prambanan 야외극장)</div>
+          </div>
+        </div>
+        <div class="day-block fade-up">
+          <div class="day-dot dot-yogya">9</div>
+          <div class="day-header">
+            <span class="day-num">Day 9</span><span class="day-date">8/8 (금)</span>
+            <span class="day-title">왕궁 & 문화 체험</span>
+          </div>
+          <div class="day-desc">
+            <div class="day-item"><i class="fas fa-crown"></i> 오전: Kraton Palace (왕궁) 관람 (08:30 오픈)</div>
+            <div class="day-item"><i class="fas fa-archway"></i> → Taman Sari (물의 궁전)</div>
+            <div class="day-item"><i class="fas fa-paint-brush"></i> 오후: 바틱 워크숍 체험 → Kota Gede 은세공 마을</div>
+            <div class="day-item food"><i class="fas fa-utensils"></i> 저녁: Prawirotaman 거리 카페·레스토랑 탐방</div>
+          </div>
+        </div>
+        <div class="day-block fade-up">
+          <div class="day-dot dot-yogya">10</div>
+          <div class="day-header">
+            <span class="day-num">Day 10</span><span class="day-date">8/9 (토)</span>
+            <span class="day-title">자연 & 자유 시간</span>
+          </div>
+          <div class="day-desc">
+            <div class="day-item"><i class="fas fa-dungeon"></i> 오전: Jomblang Cave 동굴 탐험 (사전 예약 필수)</div>
+            <div class="day-item"><i class="fas fa-mountain"></i> 또는 Mt. Merapi Jeep Tour</div>
+            <div class="day-item"><i class="fas fa-umbrella-beach"></i> 오후: Parangtritis Beach (화산 검은 모래 해변)</div>
+            <div class="day-item food"><i class="fas fa-utensils"></i> 저녁: Alun-Alun Selatan 야시장 — 마지막 밤 자유 시간</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL DAY ===== -->
+<section class="section-pad" style="background:var(--dark);color:#fff">
+  <div class="container">
+    <div class="section-label fade-up">Final Day</div>
+    <div class="section-title white fade-up">Day 11 · 8/10 (일) — 귀국일</div>
+    <div class="section-sub fade-up" style="color:var(--muted);margin-bottom:2rem">Yogyakarta → Jakarta → 인천</div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:3rem">
+      <div class="fade-up" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:1.8rem;text-align:center">
+        <i class="fas fa-plane" style="font-size:1.5rem;color:var(--gold);margin-bottom:.8rem;display:block"></i>
+        <div style="font-size:.75rem;letter-spacing:.15em;color:var(--muted);margin-bottom:.4rem">오전</div>
+        <div style="font-size:.95rem;font-weight:500">Yogyakarta → Jakarta</div>
+        <div style="font-size:.8rem;color:var(--muted);margin-top:.2rem">국내선 약 1시간 15분</div>
+      </div>
+      <div class="fade-up" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:1.8rem;text-align:center">
+        <i class="fas fa-shopping-bag" style="font-size:1.5rem;color:var(--gold);margin-bottom:.8rem;display:block"></i>
+        <div style="font-size:.75rem;letter-spacing:.15em;color:var(--muted);margin-bottom:.4rem">오후</div>
+        <div style="font-size:.95rem;font-weight:500">Jakarta 자유 시간</div>
+        <div style="font-size:.8rem;color:var(--muted);margin-top:.2rem">Grand Indonesia Mall / Taman Mini</div>
+      </div>
+      <div class="fade-up" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:1.8rem;text-align:center">
+        <i class="fas fa-plane-departure" style="font-size:1.5rem;color:var(--gold);margin-bottom:.8rem;display:block"></i>
+        <div style="font-size:.75rem;letter-spacing:.15em;color:var(--muted);margin-bottom:.4rem">야간</div>
+        <div style="font-size:.95rem;font-weight:500">23:30 CGK 출발</div>
+        <div style="font-size:.8rem;color:var(--muted);margin-top:.2rem">→ 07:10 (+1일) 인천 도착</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TIPS ===== -->
+<section class="tips">
+  <div class="container">
+    <div class="section-label fade-up" style="color:rgba(255,255,255,.5)">Useful Tips</div>
+    <div class="section-title white fade-up" style="margin-bottom:2rem">여행 TIP</div>
+    <div class="tips-grid">
+      <div class="tip-card fade-up">
+        <i class="fas fa-mobile-alt"></i>
+        <div><div class="tip-title">Grab / Gojek 앱 필수</div><div class="tip-text">택시, 음식 배달, 결제까지 한 앱으로. 현지 생활 필수 앱입니다.</div></div>
+      </div>
+      <div class="tip-card fade-up">
+        <i class="fas fa-taxi"></i>
+        <div><div class="tip-title">Blue Bird 택시</div><div class="tip-text">가장 안전하고 신뢰할 수 있는 택시 회사. 미터기 사용으로 바가지 걱정 없음.</div></div>
+      </div>
+      <div class="tip-card fade-up">
+        <i class="fas fa-money-bill-wave"></i>
+        <div><div class="tip-title">환전 팁</div><div class="tip-text">공항보다 시내 환전소가 유리합니다. 인도네시아 루피아(IDR) 사용.</div></div>
+      </div>
+      <div class="tip-card fade-up">
+        <i class="fas fa-sun"></i>
+        <div><div class="tip-title">건기 시즌!</div><div class="tip-text">7~8월은 건기 — 여행 최적기! 선크림, 모자, 물 항상 지참하세요.</div></div>
+      </div>
+      <div class="tip-card fade-up">
+        <i class="fas fa-language"></i>
+        <div><div class="tip-title">기본 인사</div><div class="tip-text">Terima kasih (감사합니다), Selamat pagi (좋은 아침) 등 기본 인도네시아어를 익혀두면 좋아요.</div></div>
+      </div>
+      <div class="tip-card fade-up">
+        <i class="fas fa-tshirt"></i>
+        <div><div class="tip-title">복장 참고</div><div class="tip-text">사원·모스크 방문 시 긴 바지와 어깨를 덮는 옷 필요. 반둥은 고원이라 저녁에 서늘합니다.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <span class="emoji">✈️🇮🇩</span>
+  <p>INDONESIA TRIP 2026 &nbsp;·&nbsp; Jakarta · Bandung · Yogyakarta</p>
+</footer>
+
+<script>
+// Intersection Observer for fade-up animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
